@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { fetchData } from '../utils/Api';
 
 function UserList() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(data => setUsers(data));
+    const url = 'https://jsonplaceholder.typicode.com/users';
+    fetchData(url).then(data => setUsers(data));
   }, []);
 
   return (

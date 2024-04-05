@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { fetchData } from '../utils/Api';
 
 function UserAlbums() {
   const [albums, setAlbums] = useState([]);
   const { userId } = useParams();
 
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/albums?userId=${userId}`)
-      .then(response => response.json())
-      .then(data => setAlbums(data));
+    const url = `https://jsonplaceholder.typicode.com/albums?userId=${userId}`;
+    fetchData(url).then(data => setAlbums(data));
   }, [userId]);
 
   return (

@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { fetchData } from '../utils/Api';
 
 const AlbumPhotos = () => {
   const [photo, setPhoto] = useState(null); 
   const { albumId } = useParams();
 
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.length > 0) {
-          setPhoto(data[0]);
-        }
-      });
+    const url = `https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`;
+    fetchData(url).then(data => {
+      if (data.length > 0) {
+        setPhoto(data[0]);
+      }
+    });
   }, [albumId]);
 
   return (
